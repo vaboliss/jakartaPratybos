@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+<h:head>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+</h:head>
+<h:body>
+    <div class="w3-container">
+    <h2 class="center">Actors that act in this Episode:</h2>
+    <div class="w3-row">
+        <div class="w3-col m1 w250">Name</div>
+        <div class="w3-col m1 w250">LastName</div>
+        <div class="w3-col m1 w250">Age</div>
+    </div>
+    <h:form>
+        <h:dataTable var="actor" value="#{actorsForEpisode.actorsThatActs}">
+            <h:column class="w250">
+                <h:outputText class="w3-col m1 w3-center" value="#{actor.name}"></h:outputText>
+            </h:column>
+            <h:column class="w250">
+                <h:outputText class="w3-col m1 w3-center" value="#{actor.lastName}"></h:outputText>
+            </h:column>
+            <h:column class="w250">
+                <h:outputText class="w3-col m1 w3-center" value="#{actor.age}"></h:outputText>
+            </h:column>
+            <h:column class="w250">
+                <h:commandButton
+                        value="Delete" action="#{actorsForEpisode.remove(actor)}">
+                    <f:param name="episodeId" value="#{actorsForEpisode.episode.id}" />
+                </h:commandButton>
+            </h:column>
+        </h:dataTable>
+    </h:form>
+    <h2 class="margintop">All actors: </h2>
+    <h:form>
+        <h:dataTable var="actor" value="#{actorsForEpisode.availableActors}">
+            <h:column class="w250">
+                <h:outputText class="w3-col m1 w3-center" value="#{actor.name}"></h:outputText>
+            </h:column>
+            <h:column class="w250">
+                <h:outputText class="w3-col m1 w3-center" value="#{actor.lastName}"></h:outputText>
+            </h:column>
+            <h:column class="w250">
+                <h:outputText class="w3-col m1 w3-center" value="#{actor.age}"></h:outputText>
+            </h:column>
+            <h:column>
+                <h:commandButton
+                        value="Add" action="#{actorsForEpisode.Add(actor)}">
+                    <f:param name="episodeId" value="#{actorsForEpisode.episode.id}" />
+                </h:commandButton>
+            </h:column>
+        </h:dataTable>
+    </h:form>
+        <h:link class="w3-button margintop w3-white w3-border w3-border-blue" outcome = "index" value="Home"/>
+    </div>
+</h:body>
+</html>

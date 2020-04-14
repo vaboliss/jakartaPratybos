@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+<h:head>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+</h:head>
+<h:body>
+    <h2>Episodes that actor acts:</h2>
+    <div class="w3-row">
+        <div class="w3-col m1 w250">Name</div>
+        <div class="w3-col m1 w250">Action</div>
+        <div class="w3-col m1 w250">Tv Series</div>
+    </div>
+    <h:form>
+        <h:dataTable var="episode" value="#{episodesForActor.actedEpisodes}">
+            <h:column class="w250">
+                <h:outputText class="w3-col m1 w3-center" value="#{episode.name}"></h:outputText>
+            </h:column>
+            <h:column class="w250">
+                <h:commandButton
+                        value="Delete" action="#{episodesForActor.remove(episode)}">
+                    <f:param name="actorId" value="#{episodesForActor.actor.id}" />
+                </h:commandButton>
+            </h:column>
+            <h:column clas="w250">
+                <h:outputText  class="w3-col m1 w3-center" value="#{episode.tvSeries.name}"></h:outputText>
+            </h:column>
+        </h:dataTable>
+    </h:form>
+    <h2>All episodes: </h2>
+    <h:form>
+        <h:dataTable var="episode" value="#{episodesForActor.availableEpisodes}">
+            <h:column class="w250">
+                <h:outputText class="w3-col m1 w3-center" value="#{episode.name}"></h:outputText>
+            </h:column>
+            <h:column class="w250">
+                <h:commandButton
+                        value="Add" action="#{episodesForActor.Add(episode)}">
+                    <f:param name="actorId" value="#{episodesForActor.actor.id}" />
+                </h:commandButton>
+            </h:column>
+            <h:column class="w250">
+                <h:outputText class="w3-col m1 w3-center" value="#{episode.tvSeries.name}"></h:outputText>
+            </h:column>
+        </h:dataTable>
+    </h:form>
+    <h:link class="w3-button margintop w3-white w3-border w3-border-blue" outcome = "index" value="Home"/>
+</h:body>
+</html>

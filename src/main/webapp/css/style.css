@@ -1,0 +1,20 @@
+.center{
+    text-align: center;
+}
+.styleList{
+    list-style-type: initial;
+}
+.styleText{
+    font-family: "Lucida Console", Courier, monospace;
+    margin: 3em 3em 3em 3em;
+    font-size: large;
+}
+.w25{
+    width: 300px;
+}
+.margintop{
+    margin-top: 3em;
+}
+.w250{
+width: 160px;
+}

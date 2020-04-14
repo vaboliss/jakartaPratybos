@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+<h:head>
+    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+</h:head>
+<h:body>
+
+    <h2 class="center">MYBATIS <br/> TVSERIES:</h2>
+    <ol class="styleList">
+        <ui:repeat value="#{tvSeriesMyBatis.allTvSeries}" var="tvSeries">
+            <li class="styleText"><h:link value="#{tvSeries.name}" outcome="episodes?tvSeriesId=#{tvSeries.id}" /></li>
+        </ui:repeat>
+    </ol>
+    <div class="w3-container w3-yellow w25">
+        <h2>Create Tv Series</h2>
+    </div>
+    <h:form class="w3-container w25">
+        <p>
+            <label>Name of Tv Series<br/></label>
+            <h:inputText value="#{tvSeriesMyBatis.tvSeriesToCreate.name}" required="true" />
+        </p>
+        <p>
+            <h:commandButton value="Add new Tv Series" action="#{tvSeriesMyBatis.createTvSeries}" />
+        </p>
+    </h:form>
+    <h:button class="margintop" value="All actors" outcome="actors" /><br/>
+
+    <h:link class="w3-button" outcome = "/index" value="Back to other Implementation"/>
+</h:body>
+</html>

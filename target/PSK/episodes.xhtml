@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+</h:head>
+<h:body>
+    <h2 class="center">Episodes in #{episodesForTvSeries.tvSeries.name} Tv Series:</h2>
+    <ol class="styleList">
+        <ui:repeat value="#{episodesForTvSeries.tvSeries.episodes}" var="episode">
+            <li class="styleText"><h:link value="#{episode.number}    #{episode.name}" outcome="actorsForEpisode?episodeId=#{episode.id}" /></li>
+        </ui:repeat>
+    </ol>
+    <div class="w3-container w3-blue w25">
+    <h2>Create an Episode</h2>
+    </div>
+    <h:form class="w3-container w25">
+        <p>
+            <label>Name</label><br/>
+            <h:inputText a:placeholder="name" value="#{episodesForTvSeries.episodeToCreate.name}" required="true" /><br/>
+        </p>
+        <p>
+            <label>Number</label><br/>
+            <h:inputText text="number" a:placeholder="number" value="#{episodesForTvSeries.episodeToCreate.number}" required="true" /><br/>
+        </p>
+        <h:commandButton value="Add Episode to the Tv Series" action="#{episodesForTvSeries.createEpisode}" >
+            <f:param name="tvSeriesId" value="#{episodesForTvSeries.tvSeries.id}" />
+        </h:commandButton>
+    </h:form>
+    <h:link class="w3-button margintop w3-white w3-border w3-border-blue" outcome = "index" value="Home"/>
+</h:body>
+</html>

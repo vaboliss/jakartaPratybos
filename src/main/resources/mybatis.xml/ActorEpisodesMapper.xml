@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.mybatis.dao.ActorEpisodesMapper">
+
+    <resultMap id="EpisodesResultMap" type="org.mybatis.model.Episodes">
+        <id column="ID" jdbcType="INTEGER" property="id"/>
+        <result column="NAME" jdbcType="VARCHAR" property="name"/>
+        <collection javaType="ArrayList" property="actors" resultMap="EpisodesResultMap" />
+    </resultMap>
+    <resultMap id="ActorResultMap" type="org.mybatis.model.Actor">
+        <id column="ID" jdbcType="INTEGER" property="id" />
+        <result column="NAME" jdbcType="VARCHAR" property="name" />
+        <collection javaType="ArrayList" property="episodes" resultMap="ActorResultMap" />
+    </resultMap>
+
+    <select id="getActors" resultMap="ActorResultMap">
+    SELECT
+    a.id AS id, a.name AS name, a.lastname as lastname, a.age as age
+    FROM PUBLIC.ACTOR AS a
+    LEFT JOIN PUBLIC.ACTOR_EPISODE AS ae ON a.id = ae.ACTOR_ID
+    LEFT JOIN PUBLIC.EPISODES AS e ON e.id = ae.EPISODE_ID
+    WHERE 1=1
+    AND e.id = #{episodeId}
+    </select>
+    <select id="getEpisodes" resultMap="EpisodesResultMap">
+    SELECT
+    e.id AS id, e.name AS name
+    FROM PUBLIC.EPISODES AS  e
+    LEFT JOIN PUBLIC.ACTOR_EPISODE AS ae ON e.id = ae.EPISODE_ID
+    LEFT JOIN PUBLIC.ACTOR AS a ON a.id = ae.ACTOR_ID
+    WHERE 1=1
+      AND a.id = #{actorId}
+    </select>
+    <insert id="insert" parameterType="org.mybatis.model.ActorEpisodes" useGeneratedKeys="true">
+        insert into PUBLIC.ACTOR_EPISODE (ACTOR_ID, EPISODE_ID)
+        values (#{actorId,jdbcType=INTEGER},#{episodeId,jdbcType=INTEGER})
+    </insert>
+    <delete id="delete" parameterType="org.mybatis.model.ActorEpisodes">
+    DELETE FROM ACTOR_EPISODE
+    WHERE 1=1
+    AND ACTOR_ID=#{actorId}
+    AND EPISODE_ID=#{episodeId}
+    </delete>
+</mapper>

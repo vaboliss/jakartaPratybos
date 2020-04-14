@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <typeAlias type="org.mybatis.model.Actor" alias="Actor"/>
+        <typeAlias type="org.mybatis.model.Episodes" alias="Episodes"/>
+        <typeAlias type="org.mybatis.model.Tvseries" alias="TvSeries"/>
+    </typeAliases>
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="MANAGED"/>
+            <dataSource type="JNDI">
+                <property name="data_source" value="TvSeriesDataSource"/>
+        </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper resource="mybatis.xml/EpisodesMapper.xml"/>
+        <mapper resource="mybatis.xml/ActorMapper.xml"/>
+        <mapper resource="mybatis.xml/TvSeriesMapper.xml"/>
+        <mapper resource="mybatis.xml/ActorEpisodesMapper.xml"/>
+    </mappers>
+</configuration>
